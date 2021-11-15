@@ -1,24 +1,24 @@
 #include "ros/ros.h"
 #include "fiducial_msgs/FiducialTransformArray.h"
-#include "test_robot_core/mrkrDist.h"
-#include "fiducial_msgs/FiducialTransformArray.h"
+#include "robot_msgs/mrkrDist.h"
 
 
-void marker_pose(const fiducial_msgs::FiducialTransformArray &msg);
-bool distance(test_robot_core::mrkrDist::Response &res);
-
+void marker_pose(const fiducial_msgs::FiducialTransformArray &fid_msg);
+bool distances(robot_msgs::mrkrDist::Request &req, 
+			 robot_msgs::mrkrDist::Response &res);
+using namespace std;
 
 float fiducial_dist;
-test_robot_core::mrkrDist::Response &res
+//robot_msgs::mrkrDist::Response &res;
 
 int main(int argc, char **argv)
 {
     ros::init(argc, argv, "mrkr_server");
     ros::NodeHandle nh;
 
-    ros::ServiceServer marker_dist = nh.advertiseService("mrkr_dist_srvr", distance);
+    ros::ServiceServer marker_dist = nh.advertiseService("mrkr_dist_srvr", distances);
 
-    ros::Subscriber sub = n.subscribe("/fiducial_transforms", 10, marker_pose);
+    ros::Subscriber sub = nh.subscribe("/fiducial_transforms", 10, marker_pose);
 
     ROS_INFO("ready srv server!");
 
@@ -30,18 +30,21 @@ int main(int argc, char **argv)
 
 void marker_pose(const fiducial_msgs::FiducialTransformArray &fid_msg)
 {
-	fiducial_dist = fid_msg.transforms[0].transform.translation.z;
-	ROS_INFO("%f",fiducial_dist);
+	for(int i=0; i<fid_msg.transforms.size() ; i++)
+	{
+		fiducial_dist = fid_msg.transforms[i].transform.translation.z;
+		ROS_INFO("id : %d, distance : %f", i, fiducial_dist);
+	}
 }
 
 
-bool distance(test_robot_core::mrkrDist::Request &req, 
-			 test_robot_core::mrkrDist::Response &res)
+bool distances(robot_msgs::mrkrDist::Request &req, 
+			 robot_msgs::mrkrDist::Response &res)
 {
-	if(fiducial_dist < 1)
-		res.response.m_result = true;
+	if(fiducial_dist != 0 && fiducial_dist < 1)
+		res.m_result = true;
 	else
-		res.response.m_result = false;
+		res.m_result = false;
 
 	return true;
 }
