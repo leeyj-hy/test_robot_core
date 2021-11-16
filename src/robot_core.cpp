@@ -46,13 +46,11 @@ int main(int argc, char **argv)
 		switch(mod)
 		{
 			case 1 :  //marker mod
-				ROS_INFO("marker mod");
 				marker_ok();
 			break;
 
 
 			case 2 :  //ultrasonic mod
-				ROS_INFO("ultrasonic mod");
 				ultrasonic_ok();
 			break;
 

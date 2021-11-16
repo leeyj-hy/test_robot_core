@@ -33,7 +33,7 @@ void marker_pose(const fiducial_msgs::FiducialTransformArray &fid_msg)
 	for(int i=0; i<fid_msg.transforms.size() ; i++)
 	{
 		fiducial_dist = fid_msg.transforms[i].transform.translation.z;
-		ROS_INFO("id : %d, distance : %f", i, fiducial_dist);
+		ROS_INFO("MARKER MOD id : %d, distance : %f", i, fiducial_dist);
 	}
 }
 
