@@ -1,0 +1,11 @@
+<launch>
+
+  <node pkg="test_robot_core" type="robot_core" name="robot_core" output="screen"/>
+
+
+  <node pkg="test_robot_core" type="ultrasonic_dist" name="ultrasonic_dist" output="screen"/>
+
+
+  <node pkg="test_robot_core" type="marker_dist" name="marker_dist" output="screen"/>
+
+</launch>
