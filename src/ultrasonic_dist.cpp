@@ -21,7 +21,7 @@ int main(int argc, char **argv)
 
     ros::Subscriber sub = nh.subscribe("/chatter", 10, ultrasonic_pose);
 
-    ROS_INFO("ready srv server!");
+    ROS_INFO("ready ultrasonic server!");
 
     ros::spin();
 

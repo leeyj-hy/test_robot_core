@@ -20,7 +20,7 @@ int main(int argc, char **argv)
 
     ros::Subscriber sub = nh.subscribe("/fiducial_transforms", 10, marker_pose);
 
-    ROS_INFO("ready srv server!");
+    ROS_INFO("ready marker server!");
 
     ros::spin();
 
