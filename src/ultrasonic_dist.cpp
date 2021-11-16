@@ -32,7 +32,7 @@ int main(int argc, char **argv)
 void ultrasonic_pose(const std_msgs::Float64 &us_msg)
 {
 	ultrasonic_dist=us_msg.data;
-	ROS_INFO("ULTRASONIC MOD distance : %f",us_msg);
+	ROS_INFO("distance : %f",us_msg);
 	
 }
 
